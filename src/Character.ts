@@ -27,5 +27,16 @@ export class Character {
     this.artifacts = artifacts;
   }
 
-  calculateStatus(statusBuffs: statusBuff[]) {}
+  calculateStatus(statusBuffs: statusBuff[]) {
+    const attackPercentBuff: number = (
+      statusBuffs.find((x) => x.type === "percent" && x.name === "attack") ?? { value: 0 }
+    ).value;
+
+    const attackNumberBuff: number = (
+      statusBuffs.find((x) => x.type === "number" && x.name === "attack") ?? { value: 0 }
+    ).value;
+    const attack: number = this.baseAttack * (1 + attackPercentBuff) + attackNumberBuff;
+
+    return attack;
+  }
 }

@@ -1,6 +1,6 @@
-import { Artifact, sumArtifactStatus } from "./Artifact.js";
+import { Artifact } from "./Artifact.js";
 import { Character } from "./Character.js";
-import { numberBuff, percentBuff } from "./utils.js";
+import { numberBuff, percentBuff, statusBuff } from "./utils.js";
 
 const fSub1: numberBuff = { type: "number", name: "defense", value: 23 };
 const fSub2: percentBuff = { type: "percent", name: "attack", value: 0.058 };
@@ -28,7 +28,7 @@ const fSub9: numberBuff = { type: "number", name: "hitPoint", value: 538 };
 const fSub10: percentBuff = { type: "percent", name: "criticalDamage", value: 0.194 };
 const fSub11: numberBuff = { type: "number", name: "attack", value: 14 };
 const fSub12: percentBuff = { type: "percent", name: "criticalRate", value: 0.093 };
-const clock = new Artifact("clock", { type: "percent", name: "attack", value: 0.466 }, [
+const clock = new Artifact("clock", { type: "percent", name: "attack", value: 0.826 }, [
   fSub9,
   fSub10,
   fSub11,
@@ -61,4 +61,8 @@ const artifacts = [flower, plume, clock, goblet, circlet];
 
 const character = new Character(10164, 351, 0, 5, 50, 1, artifacts);
 
-console.log(sumArtifactStatus(artifacts));
+const a: statusBuff = { type: "number", name: "attack", value: 0 };
+
+console.log(character.calculateStatus([a]));
+
+console.log(a);

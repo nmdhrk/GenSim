@@ -22,14 +22,31 @@ export function calculateDamage(
   );
 }
 
-export function addStatusBuff(statusBuffs: statusBuff[], statusBuff: statusBuff): void {
+export function addStatusBuff(statusBuffs: statusBuff[], statusBuff: statusBuff): statusBuff[] {
+  const result: statusBuff[] = [];
   const existStatusBuffIndex = statusBuffs.findIndex(
     (s) => s.type === statusBuff.type && s.name === statusBuff.name
   );
   if (existStatusBuffIndex === -1) {
-    statusBuffs.push(statusBuff);
+    result.push(statusBuff);
   } else {
-    statusBuffs[existStatusBuffIndex].value += statusBuff.value;
+    result.push({
+      type: statusBuff.type,
+      name: statusBuff.name,
+      value: statusBuffs[existStatusBuffIndex].value + statusBuff.value,
+    } as statusBuff);
+  }
+
+  return result;
+}
+
+export function sumStatusBuff(
+  // TODO 副作用がない形に修正が必要
+  statusBuffs1: statusBuff[],
+  statusBuffs2: statusBuff[]
+) {
+  for (const statusBuff2 of statusBuffs2) {
+    addStatusBuff(statusBuffs1, statusBuff2);
   }
 }
 

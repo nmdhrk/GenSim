@@ -22,6 +22,7 @@ export function printArtifact(artifact: Artifact) {
 }
 
 export function sumArtifactStatus(artifacts: Artifact[]) {
+  // TODO addStatusBuff関数を副作用なしにしたため、要修正
   const result: statusBuff[] = [];
   for (const artifact of artifacts) {
     addStatusBuff(result, artifact.mainStatus);
