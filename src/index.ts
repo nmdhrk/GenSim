@@ -23,9 +23,15 @@ const enemy = new Enemy();
 
 const normalAttacks = wanderer.normalAttack([shimeken, soko1, soko2]);
 const chargeAttack = wanderer.chargeAttack([shimeken, soko1, soko2]);
+const burst = wanderer.burst([shimeken, soko1, soko2]);
 
 console.log(enemy.calculateDamage(normalAttacks[0]));
 console.log(enemy.calculateDamage(normalAttacks[1]));
 console.log(enemy.calculateDamage(normalAttacks[2]));
 console.log(enemy.calculateDamage(normalAttacks[3]));
 console.log(enemy.calculateDamage(chargeAttack[0]));
+console.log(enemy.calculateDamage(burst[0]));
+console.log(enemy.calculateDamage(burst[1]));
+console.log(enemy.calculateDamage(burst[2]));
+console.log(enemy.calculateDamage(burst[3]));
+console.log(enemy.calculateDamage(burst[4]));

@@ -62,4 +62,20 @@ export class Wanderer extends Character {
     };
     return [damage];
   }
+
+  burst(statusBuffs: StatusBuff[]): Damage[] {
+    const attack = this.calculateAttack(statusBuffs);
+    const criticalRate = this.calculateCriticalRate(statusBuffs);
+    const criticalDamage = this.calculateCriticalDamage(statusBuffs);
+    const damage: Damage = {
+      type: "burst",
+      element: "anemo",
+      value: attack * 2.65,
+      criticalRate: criticalRate,
+      criticalDamage: criticalDamage,
+      buffs: statusBuffs,
+    };
+
+    return [damage, damage, damage, damage, damage];
+  }
 }

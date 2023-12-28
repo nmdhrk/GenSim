@@ -64,7 +64,7 @@ export abstract class Character {
 
   //abstract skill(statusBuffs: StatusBuff[]): Damage[];
 
-  //abstract burst(statusBuffs: StatusBuff[]): Damage[];
+  abstract burst(statusBuffs: StatusBuff[]): Damage[];
 
   calculateAttack(statusBuffs: StatusBuff[]) {
     const artifactStatusBuffs: StatusBuff[] = sumArtifactStatusBuff(this.artifacts);
