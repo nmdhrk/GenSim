@@ -8,6 +8,25 @@ export type Element =
   | "geo"
   | "physical";
 
+export type DamageBuff = {
+  name:
+    | "normalAttack"
+    | "chargedAttack"
+    | "plungingAttack"
+    | "skill"
+    | "burst"
+    | "pyro"
+    | "hydro"
+    | "dendro"
+    | "electro"
+    | "anemo"
+    | "cyro"
+    | "geo"
+    | "physical"
+    | "all";
+  value: number;
+};
+
 export function calculateDamage(
   baseDamage: number,
   specialMulti: PercentBuff,
@@ -71,7 +90,13 @@ export type PercentBuff = {
     | "anemo"
     | "cyro"
     | "geo"
-    | "physical";
+    | "physical"
+    | "normalAttack"
+    | "chargedAttack"
+    | "plungingAttack"
+    | "skill"
+    | "burst"
+    | "all";
   value: number;
 };
 

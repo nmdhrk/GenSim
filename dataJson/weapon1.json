@@ -1,0 +1,8 @@
+{
+    "attack": 401,
+    "mainStatus": {
+        "type": "number",
+        "name": "attack",
+        "value": 0
+    }
+}

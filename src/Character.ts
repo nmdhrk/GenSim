@@ -1,12 +1,32 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
 import { Artifact, sumArtifactStatusBuff } from "./Artifact.js";
-import { addStatusBuff, StatusBuff, sumStatusBuff } from "./utils.js";
+import { addStatusBuff, Element, StatusBuff, sumStatusBuff } from "./utils.js";
 import { Weapon } from "./Weapon.js";
 
-export class Character {
+export type Status = {
+  hitPoint: number;
+  attack: number;
+  defense: number;
+  elementalMastery: number;
+  criticalRate: number;
+  criticalDamage: number;
+  energyRecharge: number;
+};
+
+export type Attack = {
+  element: Element;
+  TENPU: number;
+};
+
+export type Damage = {
+  type: "normalAttack" | "chargedAttack" | "plungingAttack" | "skill" | "burst";
+  element: Element;
+  value: number;
+  criticalRate: number;
+  criticalDamage: number;
+  buffs: StatusBuff[];
+};
+
+export abstract class Character {
   readonly baseHitPoint: number;
   readonly baseAttack: number;
   readonly baseDefense: number;
@@ -37,6 +57,14 @@ export class Character {
     this.energyRecharge = energyRecharge;
     this.artifacts = artifacts;
   }
+
+  abstract normalAttack(statusBuffs: StatusBuff[]): Damage[];
+
+  //abstract chargeAttack(statusBuffs: StatusBuff[]): Damage[];
+
+  //abstract skill(statusBuffs: StatusBuff[]): Damage[];
+
+  //abstract burst(statusBuffs: StatusBuff[]): Damage[];
 
   calculateAttack(statusBuffs: StatusBuff[]) {
     const artifactStatusBuffs: StatusBuff[] = sumArtifactStatusBuff(this.artifacts);
@@ -156,24 +184,17 @@ export class Character {
     return energyRecharge;
   }
 
-  static createFromJson(filePath: string, artifacts: Artifact[], weapon: Weapon): Character {
-    const __dirname = path.dirname(fileURLToPath(import.meta.url));
-    const jsonBuffer = fs.readFileSync(path.resolve(__dirname, filePath));
-    const jsonString = jsonBuffer.toString();
-    const jsonData = JSON.parse(jsonString);
+  calculateStatus(statusBuffs: StatusBuff[]): Status {
+    const result: Status = {
+      hitPoint: this.calculateHitPoint(statusBuffs),
+      attack: this.calculateAttack(statusBuffs),
+      defense: this.calculateDefense(statusBuffs),
+      elementalMastery: this.calculateElementalMastery(statusBuffs),
+      criticalRate: this.calculateCriticalRate(statusBuffs),
+      criticalDamage: this.calculateCriticalDamage(statusBuffs),
+      energyRecharge: this.calculateEnergyRecharge(statusBuffs),
+    };
 
-    const character = new Character(
-      jsonData.hitPoint,
-      jsonData.attack,
-      jsonData.defense,
-      jsonData.elementalMastery,
-      jsonData.criticalRate,
-      jsonData.criticalDamage,
-      jsonData.energyRecharge,
-      artifacts,
-      weapon
-    );
-
-    return character;
+    return result;
   }
 }
