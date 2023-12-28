@@ -1,18 +1,20 @@
-export function calculateAttack(
-  baseAttack: number,
-  attackBuffPercent: percentBuff,
-  attackBuffNumber: number
-) {
-  return baseAttack * (1 + attackBuffPercent.value) + attackBuffNumber;
-}
+export type Element =
+  | "pyro"
+  | "hydro"
+  | "dendro"
+  | "electro"
+  | "anemo"
+  | "cyro"
+  | "geo"
+  | "physical";
 
 export function calculateDamage(
   baseDamage: number,
-  specialMulti: percentBuff,
+  specialMulti: PercentBuff,
   specialAdd: number,
-  damageBuff: percentBuff,
-  criticalBuff: percentBuff,
-  elementalReactionBuff: percentBuff
+  damageBuff: PercentBuff,
+  criticalBuff: PercentBuff,
+  elementalReactionBuff: PercentBuff
 ) {
   return (
     (baseDamage * specialMulti.value + specialAdd) *
@@ -22,41 +24,58 @@ export function calculateDamage(
   );
 }
 
-export function addStatusBuff(statusBuffs: statusBuff[], statusBuff: statusBuff): statusBuff[] {
-  const result: statusBuff[] = [];
-  const existStatusBuffIndex = statusBuffs.findIndex(
+//statusBuffsリストににstatusBuffを足した新しいリストを返却する
+export function addStatusBuff(statusBuffs: StatusBuff[], statusBuff: StatusBuff): StatusBuff[] {
+  const result: StatusBuff[] = statusBuffs.map((list) => ({
+    type: list.type,
+    name: list.name,
+    value: list.value,
+  })) as StatusBuff[];
+  const existStatusBuffIndex = result.findIndex(
     (s) => s.type === statusBuff.type && s.name === statusBuff.name
   );
   if (existStatusBuffIndex === -1) {
-    result.push(statusBuff);
+    result.push({ ...statusBuff });
   } else {
-    result.push({
-      type: statusBuff.type,
-      name: statusBuff.name,
-      value: statusBuffs[existStatusBuffIndex].value + statusBuff.value,
-    } as statusBuff);
+    result[existStatusBuffIndex].value += statusBuff.value;
   }
 
   return result;
 }
 
 export function sumStatusBuff(
-  // TODO 副作用がない形に修正が必要
-  statusBuffs1: statusBuff[],
-  statusBuffs2: statusBuff[]
-) {
-  for (const statusBuff2 of statusBuffs2) {
-    addStatusBuff(statusBuffs1, statusBuff2);
+  statusBuffs1: StatusBuff[],
+  statusBuffs2: StatusBuff[]
+): StatusBuff[] {
+  let result: StatusBuff[] = statusBuffs1.concat();
+
+  for (const statusBuff of statusBuffs2) {
+    result = addStatusBuff(result, statusBuff);
   }
+  return result;
 }
 
-export type percentBuff = {
+export type PercentBuff = {
   type: "percent";
-  name: "hitPoint" | "attack" | "energyRecharge" | "defense" | "criticalRate" | "criticalDamage";
+  name:
+    | "hitPoint"
+    | "attack"
+    | "energyRecharge"
+    | "defense"
+    | "criticalRate"
+    | "criticalDamage"
+    | "pyro"
+    | "hydro"
+    | "dendro"
+    | "electro"
+    | "anemo"
+    | "cyro"
+    | "geo"
+    | "physical";
   value: number;
 };
 
-export type numberBuff = {
+export type NumberBuff = {
   type: "number";
   name:
     | "hitPoint"
@@ -69,4 +88,4 @@ export type numberBuff = {
   value: number;
 };
 
-export type statusBuff = percentBuff | numberBuff;
+export type StatusBuff = PercentBuff | NumberBuff;

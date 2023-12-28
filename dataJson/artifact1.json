@@ -1,0 +1,30 @@
+{
+    "part": "flower",
+    "mainStatus": {
+        "type": "number",
+        "name": "hitPoint",
+        "value": 4780
+    },
+    "subStatuses": [
+        {
+            "type": "number",
+            "name": "defense",
+            "value": 23
+        },
+        {
+            "type": "percent",
+            "name": "attack",
+            "value": 0.058
+        },
+        {
+            "type": "percent",
+            "name": "criticalRate",
+            "value": 0.136
+        },
+        {
+            "type": "percent",
+            "name": "criticalDamage",
+            "value": 0.148
+        }
+    ]
+}

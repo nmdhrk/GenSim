@@ -1,8 +1,12 @@
-import { addStatusBuff, statusBuff } from "./utils.js";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-export type mainStatus = statusBuff;
-export type subStatuses = statusBuff[];
-export type artifactPart = "flower" | "plume" | "clock" | "goblet" | "circlet";
+import { addStatusBuff, StatusBuff } from "./utils.js";
+
+export type MainStatus = StatusBuff;
+export type SubStatuses = StatusBuff[];
+export type ArtifactPart = "flower" | "plume" | "clock" | "goblet" | "circlet";
 
 export function printArtifact(artifact: Artifact) {
   console.log(`part:${artifact.part}`);
@@ -21,27 +25,40 @@ export function printArtifact(artifact: Artifact) {
   }
 }
 
-export function sumArtifactStatus(artifacts: Artifact[]) {
-  // TODO addStatusBuff関数を副作用なしにしたため、要修正
-  const result: statusBuff[] = [];
+export function sumArtifactStatusBuff(artifacts: Artifact[]) {
+  //副作用があるため要修正
+  let result: StatusBuff[] = [];
   for (const artifact of artifacts) {
-    addStatusBuff(result, artifact.mainStatus);
+    result = addStatusBuff(result, artifact.mainStatus).concat();
     for (const subStatus of artifact.subStatuses) {
-      addStatusBuff(result, subStatus);
+      result = addStatusBuff(result, subStatus).concat();
     }
   }
   return result;
 }
 
 export class Artifact {
-  part: artifactPart;
-  mainStatus: mainStatus;
-  subStatuses: subStatuses = [];
-  constructor(part: artifactPart, mainStatus: mainStatus, subStatuses: subStatuses) {
+  part: ArtifactPart;
+  mainStatus: MainStatus;
+  subStatuses: SubStatuses = [];
+  constructor(part: ArtifactPart, mainStatus: MainStatus, subStatuses: SubStatuses) {
     this.part = part;
     this.mainStatus = mainStatus;
     for (const subStatus of subStatuses) {
       this.subStatuses.push(subStatus);
     }
+  }
+
+  static createFromJson(filePath: string) {
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const jsonBuffer = fs.readFileSync(path.resolve(__dirname, filePath));
+    const jsonString = jsonBuffer.toString();
+    const jsonData = JSON.parse(jsonString);
+
+    const part: ArtifactPart = jsonData.part;
+    const mainStatus: MainStatus = jsonData.mainStatus;
+    const subStatuses: SubStatuses = jsonData.subStatuses;
+    const artifact: Artifact = new Artifact(part, mainStatus, subStatuses);
+    return artifact;
   }
 }

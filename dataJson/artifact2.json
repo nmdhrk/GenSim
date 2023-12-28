@@ -1,0 +1,30 @@
+{
+    "part": "plume",
+    "mainStatus": {
+        "type": "number",
+        "name": "attack",
+        "value": 311
+    },
+    "subStatuses": [
+        {
+            "type": "number",
+            "name": "hitPoint",
+            "value": 209
+        },
+        {
+            "type": "percent",
+            "name": "criticalRate",
+            "value": 0.035
+        },
+        {
+            "type": "percent",
+            "name": "criticalDamage",
+            "value": 0.303
+        },
+        {
+            "type": "number",
+            "name": "defense",
+            "value": 16
+        }
+    ]
+}

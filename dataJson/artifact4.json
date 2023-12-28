@@ -1,0 +1,30 @@
+{
+    "part": "goblet",
+    "mainStatus": {
+        "type": "percent",
+        "name": "geo",
+        "value": 0.466
+    },
+    "subStatuses": [
+        {
+            "type": "percent",
+            "name": "energyRecharge",
+            "value": 0.104
+        },
+        {
+            "type": "percent",
+            "name": "criticalDamage",
+            "value": 0.117
+        },
+        {
+            "type": "percent",
+            "name": "defense",
+            "value": 0.255
+        },
+        {
+            "type": "number",
+            "name": "attack",
+            "value": 18
+        }
+    ]
+}
