@@ -60,7 +60,7 @@ export abstract class Character {
 
   abstract normalAttack(statusBuffs: StatusBuff[]): Damage[];
 
-  //abstract chargeAttack(statusBuffs: StatusBuff[]): Damage[];
+  abstract chargeAttack(statusBuffs: StatusBuff[]): Damage[];
 
   //abstract skill(statusBuffs: StatusBuff[]): Damage[];
 

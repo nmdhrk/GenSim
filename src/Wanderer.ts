@@ -12,7 +12,6 @@ export class Wanderer extends Character {
     const attack = this.calculateAttack(statusBuffs);
     const criticalRate = this.calculateCriticalRate(statusBuffs);
     const criticalDamage = this.calculateCriticalDamage(statusBuffs);
-    const isCritical = Math.random() > this.criticalRate;
     const damage1: Damage = {
       type: "normalAttack",
       element: "anemo",
@@ -47,5 +46,20 @@ export class Wanderer extends Character {
     };
 
     return [damage1, damage2, damage3, damage4];
+  }
+
+  chargeAttack(statusBuffs: StatusBuff[]): Damage[] {
+    const attack = this.calculateAttack(statusBuffs);
+    const criticalRate = this.calculateCriticalRate(statusBuffs);
+    const criticalDamage = this.calculateCriticalDamage(statusBuffs);
+    const damage: Damage = {
+      type: "chargedAttack",
+      element: "anemo",
+      value: attack * 2.377,
+      criticalRate: criticalRate,
+      criticalDamage: criticalDamage,
+      buffs: statusBuffs,
+    };
+    return [damage];
   }
 }
