@@ -23,6 +23,7 @@ export type Damage = {
   value: number;
   criticalRate: number;
   criticalDamage: number;
+  elementalMastery: number;
   buffs: StatusBuff[];
 };
 

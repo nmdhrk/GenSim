@@ -20,6 +20,7 @@ const soko2: StatusBuff = { type: 'percent', name: 'chargedAttack', value: 0.16 
 
 const wanderer = new Wanderer(artifacts, weapon);
 const enemy = new Enemy();
+enemy.element = 'pyro';
 
 const skill = wanderer.skill([shimeken]);
 const normalAttacks = wanderer.normalAttack([shimeken]);
