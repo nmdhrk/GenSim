@@ -5,6 +5,7 @@ export class Enemy {
   element: Element | undefined = undefined;
   level = 90;
   elementDefenseRate = 0.9;
+  elementUnit = 0;
   static canAttachElement: Element[] = ['pyro', 'cyro', 'dendro', 'electro', 'hydro'];
   static canSwirlElement: Element[] = ['pyro', 'hydro', 'electro', 'cyro'];
 
@@ -24,12 +25,17 @@ export class Enemy {
     if (this.element === undefined) {
       if (Enemy.canAttachElement.includes(damage.element)) {
         this.element = damage.element;
+        this.elementUnit = damage.unit;
       }
     } else if (Enemy.canSwirlElement.includes(this.element) && damage.element === 'anemo') {
       const elementalMasteryRate =
         (16 * damage.elementalMastery) / (damage.elementalMastery + 2000);
       elementalReactionsDamage =
         0.6 * 1446.85 * (1 + elementalMasteryRate) * this.elementDefenseRate;
+    }
+
+    if (damage.onHitProcess !== undefined) {
+      damage.onHitProcess(this, damage.character);
     }
 
     const finalDamage =

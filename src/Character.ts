@@ -1,4 +1,5 @@
 import { Artifact, sumArtifactStatusBuff } from './Artifact.js';
+import { Enemy } from './Enemy.js';
 import { addStatusBuff, Element, StatusBuff, sumStatusBuff } from './utils.js';
 import { Weapon } from './Weapon.js';
 
@@ -18,13 +19,16 @@ export type Attack = {
 };
 
 export type Damage = {
+  character: Character;
   type: 'normalAttack' | 'chargedAttack' | 'plungingAttack' | 'skill' | 'burst';
   element: Element;
+  unit: number;
   value: number;
   criticalRate: number;
   criticalDamage: number;
   elementalMastery: number;
   buffs: StatusBuff[];
+  onHitProcess?: (enemy: Enemy, character: Character) => void;
 };
 
 export abstract class Character {
@@ -41,6 +45,8 @@ export abstract class Character {
   abstract skillCoolTime: number;
   abstract burstCoolTime: number;
   abstract burstEnergy: number;
+  abstract attachedElement: Element | undefined;
+
   constructor(
     baseHitPoint: number,
     baseAttack: number,

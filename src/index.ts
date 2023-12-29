@@ -17,12 +17,13 @@ const weapon = Weapon.createFromJson('../dataJson/weapon1.json');
 const shimeken: StatusBuff = { type: 'percent', name: 'attack', value: 0.36 };
 
 const wanderer = new Wanderer(artifacts, weapon);
+wanderer.attachedElement = 'cyro';
 const enemy = new Enemy();
 enemy.element = 'pyro';
 
 const skill = wanderer.skill([shimeken]);
 console.log(`スキル:${enemy.calculateDamage(skill[0])}`);
-
+console.log(wanderer.calculateStatus([shimeken]));
 const normalAttacks = wanderer.normalAttack([shimeken]);
 console.log(`通常攻撃1:${enemy.calculateDamage(normalAttacks[0])}`);
 console.log(`通常攻撃2:${enemy.calculateDamage(normalAttacks[1])}`);
@@ -45,4 +46,4 @@ console.log(
   )}`
 );
 
-//console.log(wanderer.calculateStatus([shimeken]));
+console.log(wanderer.calculateStatus([shimeken]));
