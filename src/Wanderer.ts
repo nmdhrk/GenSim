@@ -4,6 +4,11 @@ import { Weapon } from "./Weapon.js";
 import { StatusBuff } from "./utils.js";
 
 export class Wanderer extends Character {
+  isHover: boolean = false;
+  skillCoolTime: number = 6;
+  burstCoolTime: number = 15;
+  burstEnergy: number = 60;
+
   constructor(artifacts: Artifact[], weapon: Weapon) {
     super(10164, 328, 607, 0, 0.242, 0.5, 1, artifacts, weapon);
   }
@@ -12,10 +17,11 @@ export class Wanderer extends Character {
     const attack = this.calculateAttack(statusBuffs);
     const criticalRate = this.calculateCriticalRate(statusBuffs);
     const criticalDamage = this.calculateCriticalDamage(statusBuffs);
+    const hoverBuff = this.isHover ? 1.537 : 1;
     const damage1: Damage = {
       type: "normalAttack",
       element: "anemo",
-      value: attack * 1.358,
+      value: attack * 1.358 * hoverBuff,
       criticalRate: criticalRate,
       criticalDamage: criticalDamage,
       buffs: statusBuffs,
@@ -23,7 +29,7 @@ export class Wanderer extends Character {
     const damage2: Damage = {
       type: "normalAttack",
       element: "anemo",
-      value: attack * 1.285,
+      value: attack * 1.285 * hoverBuff,
       criticalRate: criticalRate,
       criticalDamage: criticalDamage,
       buffs: statusBuffs,
@@ -31,7 +37,7 @@ export class Wanderer extends Character {
     const damage3: Damage = {
       type: "normalAttack",
       element: "anemo",
-      value: attack * 0.942,
+      value: attack * 0.942 * hoverBuff,
       criticalRate: criticalRate,
       criticalDamage: criticalDamage,
       buffs: statusBuffs,
@@ -39,7 +45,7 @@ export class Wanderer extends Character {
     const damage4: Damage = {
       type: "normalAttack",
       element: "anemo",
-      value: attack * 0.942,
+      value: attack * 0.942 * hoverBuff,
       criticalRate: criticalRate,
       criticalDamage: criticalDamage,
       buffs: statusBuffs,
@@ -52,14 +58,33 @@ export class Wanderer extends Character {
     const attack = this.calculateAttack(statusBuffs);
     const criticalRate = this.calculateCriticalRate(statusBuffs);
     const criticalDamage = this.calculateCriticalDamage(statusBuffs);
+    const hoverBuff = this.isHover ? 1.43 : 1;
     const damage: Damage = {
       type: "chargedAttack",
       element: "anemo",
-      value: attack * 2.377,
+      value: attack * 2.377 * hoverBuff,
       criticalRate: criticalRate,
       criticalDamage: criticalDamage,
       buffs: statusBuffs,
     };
+    return [damage];
+  }
+
+  skill(statusBuffs: StatusBuff[]): Damage[] {
+    const attack = this.calculateAttack(statusBuffs);
+    const criticalRate = this.calculateCriticalRate(statusBuffs);
+    const criticalDamage = this.calculateCriticalDamage(statusBuffs);
+    const damage: Damage = {
+      type: "skill",
+      element: "anemo",
+      value: attack * 1.714,
+      criticalRate: criticalRate,
+      criticalDamage: criticalDamage,
+      buffs: statusBuffs,
+    };
+
+    this.isHover = true;
+
     return [damage];
   }
 
@@ -75,6 +100,8 @@ export class Wanderer extends Character {
       criticalDamage: criticalDamage,
       buffs: statusBuffs,
     };
+
+    this.isHover = false;
 
     return [damage, damage, damage, damage, damage];
   }

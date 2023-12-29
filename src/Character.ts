@@ -36,6 +36,10 @@ export abstract class Character {
   readonly energyRecharge: number;
   readonly artifacts: Artifact[];
   readonly weapon: Weapon;
+
+  abstract skillCoolTime: number;
+  abstract burstCoolTime: number;
+  abstract burstEnergy: number;
   constructor(
     baseHitPoint: number,
     baseAttack: number,
@@ -62,7 +66,9 @@ export abstract class Character {
 
   abstract chargeAttack(statusBuffs: StatusBuff[]): Damage[];
 
-  //abstract skill(statusBuffs: StatusBuff[]): Damage[];
+  //abstract plungingAttack(statusBuffs: StatusBuff[]): Damage[];
+
+  abstract skill(statusBuffs: StatusBuff[]): Damage[];
 
   abstract burst(statusBuffs: StatusBuff[]): Damage[];
 
