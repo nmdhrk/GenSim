@@ -1,8 +1,8 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-import { StatusBuff } from "./utils";
+import { StatusBuff } from './utils';
 
 export class Weapon {
   readonly attack: number;

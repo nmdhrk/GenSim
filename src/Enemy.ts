@@ -1,5 +1,5 @@
-import { Damage } from "./Character";
-import { StatusBuff } from "./utils";
+import { Damage } from './Character';
+import { StatusBuff } from './utils';
 
 export class Enemy {
   element: Element | undefined = undefined;
@@ -11,7 +11,7 @@ export class Enemy {
     const criticalDamage = isCritical ? damage.criticalDamage : 0;
     const defenseRate = 0.5;
     const damageBuffs: StatusBuff[] = damage.buffs.filter((buff) => {
-      return buff.name === damage.element || buff.name === damage.type || buff.name === "all";
+      return buff.name === damage.element || buff.name === damage.type || buff.name === 'all';
     });
     let sumDamageBuff = 0;
     for (const damageBuff of damageBuffs) {

@@ -1,25 +1,25 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-import { addStatusBuff, StatusBuff } from "./utils.js";
+import { addStatusBuff, StatusBuff } from './utils.js';
 
 export type MainStatus = StatusBuff;
 export type SubStatuses = StatusBuff[];
-export type ArtifactPart = "flower" | "plume" | "clock" | "goblet" | "circlet";
+export type ArtifactPart = 'flower' | 'plume' | 'clock' | 'goblet' | 'circlet';
 
 export function printArtifact(artifact: Artifact) {
   console.log(`part:${artifact.part}`);
-  if (artifact.mainStatus.type === "percent") {
+  if (artifact.mainStatus.type === 'percent') {
     console.log(`mainStatus->${artifact.mainStatus.name}:${artifact.mainStatus.value * 100}%\n`);
-  } else if (artifact.mainStatus.type === "number") {
+  } else if (artifact.mainStatus.type === 'number') {
     console.log(`mainStatus->${artifact.mainStatus.name}:${artifact.mainStatus.value}\n`);
   }
 
   for (const subStatus of artifact.subStatuses) {
-    if (subStatus.type === "percent") {
+    if (subStatus.type === 'percent') {
       console.log(`${subStatus.name}+${subStatus.value * 100}%`);
-    } else if (subStatus.type === "number") {
+    } else if (subStatus.type === 'number') {
       console.log(`${subStatus.name}+${subStatus.value}`);
     }
   }

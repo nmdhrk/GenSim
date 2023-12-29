@@ -1,29 +1,29 @@
 export type Element =
-  | "pyro"
-  | "hydro"
-  | "dendro"
-  | "electro"
-  | "anemo"
-  | "cyro"
-  | "geo"
-  | "physical";
+  | 'pyro'
+  | 'hydro'
+  | 'dendro'
+  | 'electro'
+  | 'anemo'
+  | 'cyro'
+  | 'geo'
+  | 'physical';
 
 export type DamageBuff = {
   name:
-    | "normalAttack"
-    | "chargedAttack"
-    | "plungingAttack"
-    | "skill"
-    | "burst"
-    | "pyro"
-    | "hydro"
-    | "dendro"
-    | "electro"
-    | "anemo"
-    | "cyro"
-    | "geo"
-    | "physical"
-    | "all";
+    | 'normalAttack'
+    | 'chargedAttack'
+    | 'plungingAttack'
+    | 'skill'
+    | 'burst'
+    | 'pyro'
+    | 'hydro'
+    | 'dendro'
+    | 'electro'
+    | 'anemo'
+    | 'cyro'
+    | 'geo'
+    | 'physical'
+    | 'all';
   value: number;
 };
 
@@ -75,41 +75,41 @@ export function sumStatusBuff(
 }
 
 export type PercentBuff = {
-  type: "percent";
+  type: 'percent';
   name:
-    | "hitPoint"
-    | "attack"
-    | "energyRecharge"
-    | "defense"
-    | "criticalRate"
-    | "criticalDamage"
-    | "pyro"
-    | "hydro"
-    | "dendro"
-    | "electro"
-    | "anemo"
-    | "cyro"
-    | "geo"
-    | "physical"
-    | "normalAttack"
-    | "chargedAttack"
-    | "plungingAttack"
-    | "skill"
-    | "burst"
-    | "all";
+    | 'hitPoint'
+    | 'attack'
+    | 'energyRecharge'
+    | 'defense'
+    | 'criticalRate'
+    | 'criticalDamage'
+    | 'pyro'
+    | 'hydro'
+    | 'dendro'
+    | 'electro'
+    | 'anemo'
+    | 'cyro'
+    | 'geo'
+    | 'physical'
+    | 'normalAttack'
+    | 'chargedAttack'
+    | 'plungingAttack'
+    | 'skill'
+    | 'burst'
+    | 'all';
   value: number;
 };
 
 export type NumberBuff = {
-  type: "number";
+  type: 'number';
   name:
-    | "hitPoint"
-    | "attack"
-    | "energyRecharge"
-    | "defense"
-    | "criticalRate"
-    | "criticalDamage"
-    | "elementalMastery";
+    | 'hitPoint'
+    | 'attack'
+    | 'energyRecharge'
+    | 'defense'
+    | 'criticalRate'
+    | 'criticalDamage'
+    | 'elementalMastery';
   value: number;
 };
 

@@ -1,6 +1,6 @@
-import { Artifact, sumArtifactStatusBuff } from "./Artifact.js";
-import { addStatusBuff, Element, StatusBuff, sumStatusBuff } from "./utils.js";
-import { Weapon } from "./Weapon.js";
+import { Artifact, sumArtifactStatusBuff } from './Artifact.js';
+import { addStatusBuff, Element, StatusBuff, sumStatusBuff } from './utils.js';
+import { Weapon } from './Weapon.js';
 
 export type Status = {
   hitPoint: number;
@@ -18,7 +18,7 @@ export type Attack = {
 };
 
 export type Damage = {
-  type: "normalAttack" | "chargedAttack" | "plungingAttack" | "skill" | "burst";
+  type: 'normalAttack' | 'chargedAttack' | 'plungingAttack' | 'skill' | 'burst';
   element: Element;
   value: number;
   criticalRate: number;
@@ -80,11 +80,11 @@ export abstract class Character {
       this.weapon.mainStatus
     );
     const attackPercentBuff: number = (
-      finalStatusBuffs.find((x) => x.type === "percent" && x.name === "attack") ?? { value: 0 }
+      finalStatusBuffs.find((x) => x.type === 'percent' && x.name === 'attack') ?? { value: 0 }
     ).value;
 
     const attackNumberBuff: number = (
-      finalStatusBuffs.find((x) => x.type === "number" && x.name === "attack") ?? { value: 0 }
+      finalStatusBuffs.find((x) => x.type === 'number' && x.name === 'attack') ?? { value: 0 }
     ).value;
     const attack: number = this.baseAttack * (1 + attackPercentBuff) + attackNumberBuff;
     return attack;
@@ -98,11 +98,11 @@ export abstract class Character {
       this.weapon.mainStatus
     );
     const defensePercentBuff: number = (
-      finalStatusBuffs.find((x) => x.type === "percent" && x.name === "defense") ?? { value: 0 }
+      finalStatusBuffs.find((x) => x.type === 'percent' && x.name === 'defense') ?? { value: 0 }
     ).value;
 
     const defenseNumberBuff: number = (
-      finalStatusBuffs.find((x) => x.type === "number" && x.name === "defense") ?? { value: 0 }
+      finalStatusBuffs.find((x) => x.type === 'number' && x.name === 'defense') ?? { value: 0 }
     ).value;
     const defense: number = this.baseDefense * (1 + defensePercentBuff) + defenseNumberBuff;
     return defense;
@@ -116,11 +116,11 @@ export abstract class Character {
       this.weapon.mainStatus
     );
     const hitPointPercentBuff: number = (
-      finalStatusBuffs.find((x) => x.type === "percent" && x.name === "hitPoint") ?? { value: 0 }
+      finalStatusBuffs.find((x) => x.type === 'percent' && x.name === 'hitPoint') ?? { value: 0 }
     ).value;
 
     const hitPointNumberBuff: number = (
-      finalStatusBuffs.find((x) => x.type === "number" && x.name === "hitPoint") ?? { value: 0 }
+      finalStatusBuffs.find((x) => x.type === 'number' && x.name === 'hitPoint') ?? { value: 0 }
     ).value;
     const hitPoint: number = this.baseHitPoint * (1 + hitPointPercentBuff) + hitPointNumberBuff;
     return hitPoint;
@@ -133,7 +133,7 @@ export abstract class Character {
       this.weapon.mainStatus
     );
     const criticalRateBuff: number = (
-      finalStatusBuffs.find((x) => x.type === "percent" && x.name === "criticalRate") ?? {
+      finalStatusBuffs.find((x) => x.type === 'percent' && x.name === 'criticalRate') ?? {
         value: 0,
       }
     ).value;
@@ -149,7 +149,7 @@ export abstract class Character {
       this.weapon.mainStatus
     );
     const criticalDamageBuff: number = (
-      finalStatusBuffs.find((x) => x.type === "percent" && x.name === "criticalDamage") ?? {
+      finalStatusBuffs.find((x) => x.type === 'percent' && x.name === 'criticalDamage') ?? {
         value: 0,
       }
     ).value;
@@ -165,7 +165,7 @@ export abstract class Character {
       this.weapon.mainStatus
     );
     const elementalMasteryBuff: number = (
-      finalStatusBuffs.find((x) => x.type === "number" && x.name === "elementalMastery") ?? {
+      finalStatusBuffs.find((x) => x.type === 'number' && x.name === 'elementalMastery') ?? {
         value: 0,
       }
     ).value;
@@ -181,7 +181,7 @@ export abstract class Character {
       this.weapon.mainStatus
     );
     const energyRechargeBuff: number = (
-      finalStatusBuffs.find((x) => x.type === "percent" && x.name === "energyRecharge") ?? {
+      finalStatusBuffs.find((x) => x.type === 'percent' && x.name === 'energyRecharge') ?? {
         value: 0,
       }
     ).value;
