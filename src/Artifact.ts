@@ -61,4 +61,12 @@ export class Artifact {
     const artifact: Artifact = new Artifact(part, mainStatus, subStatuses);
     return artifact;
   }
+
+  static createArtifactsFromJson(filePaths: string[]) {
+    const result: Artifact[] = [];
+    for (const filePath of filePaths) {
+      result.push(Artifact.createFromJson(filePath));
+    }
+    return result;
+  }
 }
