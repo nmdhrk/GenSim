@@ -1,5 +1,5 @@
 import { Artifact } from './Artifact.js';
-import { Character, Damage } from './Character.js';
+import { Attack, Character } from './Character.js';
 import { Enemy } from './Enemy.js';
 import { Weapon } from './Weapon.js';
 import { Element, PercentBuff, StatusBuff, addStatusBuff } from './utils.js';
@@ -39,13 +39,13 @@ export class Wanderer extends Character {
     return super.calculateCriticalRate(addStatusBuff(statusBuffs, cyroBuff));
   }
 
-  normalAttack(statusBuffs: StatusBuff[]): Damage[] {
+  normalAttack(statusBuffs: StatusBuff[]): Attack[] {
     const attack = this.calculateAttack(statusBuffs);
     const criticalRate = this.calculateCriticalRate(statusBuffs);
     const criticalDamage = this.calculateCriticalDamage(statusBuffs);
     const elementalMastery = this.calculateElementalMastery(statusBuffs);
     const hoverBuff = this.isHover ? 1.537 : 1;
-    const damage1: Damage = {
+    const damage1: Attack = {
       character: this,
       type: 'normalAttack',
       element: 'anemo',
@@ -56,7 +56,7 @@ export class Wanderer extends Character {
       criticalDamage: criticalDamage,
       buffs: statusBuffs,
     };
-    const damage2: Damage = {
+    const damage2: Attack = {
       character: this,
       type: 'normalAttack',
       element: 'anemo',
@@ -67,7 +67,7 @@ export class Wanderer extends Character {
       criticalDamage: criticalDamage,
       buffs: statusBuffs,
     };
-    const damage3: Damage = {
+    const damage3: Attack = {
       character: this,
       type: 'normalAttack',
       element: 'anemo',
@@ -78,7 +78,7 @@ export class Wanderer extends Character {
       criticalDamage: criticalDamage,
       buffs: statusBuffs,
     };
-    const damage4: Damage = {
+    const damage4: Attack = {
       character: this,
       type: 'normalAttack',
       element: 'anemo',
@@ -93,14 +93,14 @@ export class Wanderer extends Character {
     return [damage1, damage2, damage3, damage4];
   }
 
-  chargeAttack(statusBuffs: StatusBuff[]): Damage[] {
+  chargeAttack(statusBuffs: StatusBuff[]): Attack[] {
     const attack = this.calculateAttack(statusBuffs);
     const criticalRate = this.calculateCriticalRate(statusBuffs);
     const criticalDamage = this.calculateCriticalDamage(statusBuffs);
     const elementalMastery = this.calculateElementalMastery(statusBuffs);
     const hoverBuff = this.isHover ? 1.43 : 1;
 
-    const damage: Damage = {
+    const damage: Attack = {
       character: this,
       type: 'chargedAttack',
       element: 'anemo',
@@ -114,7 +114,7 @@ export class Wanderer extends Character {
     return [damage];
   }
 
-  skill(statusBuffs: StatusBuff[]): Damage[] {
+  skill(statusBuffs: StatusBuff[]): Attack[] {
     const attack = this.calculateAttack(statusBuffs);
     const criticalRate = this.calculateCriticalRate(statusBuffs);
     const criticalDamage = this.calculateCriticalDamage(statusBuffs);
@@ -129,7 +129,6 @@ export class Wanderer extends Character {
     }
 
     const onHitProcess = function (enemy: Enemy, wanderer: Character) {
-      console.log(`敵の付着元素は${enemy.element}でありんす`);
       if (enemy.element! === 'pyro') {
         (wanderer as Wanderer).isPyroBuff = true;
       }
@@ -141,7 +140,7 @@ export class Wanderer extends Character {
       }
     };
 
-    const damage: Damage = {
+    const damage: Attack = {
       character: this,
       type: 'skill',
       element: 'anemo',
@@ -159,12 +158,12 @@ export class Wanderer extends Character {
     return [damage];
   }
 
-  burst(statusBuffs: StatusBuff[]): Damage[] {
+  burst(statusBuffs: StatusBuff[]): Attack[] {
     const attack = this.calculateAttack(statusBuffs);
     const criticalRate = this.calculateCriticalRate(statusBuffs);
     const criticalDamage = this.calculateCriticalDamage(statusBuffs);
     const elementalMastery = this.calculateElementalMastery(statusBuffs);
-    const damage: Damage = {
+    const damage: Attack = {
       character: this,
       type: 'burst',
       element: 'anemo',

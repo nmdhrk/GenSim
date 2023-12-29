@@ -14,11 +14,6 @@ export type Status = {
 };
 
 export type Attack = {
-  element: Element;
-  TENPU: number;
-};
-
-export type Damage = {
   character: Character;
   type: 'normalAttack' | 'chargedAttack' | 'plungingAttack' | 'skill' | 'burst';
   element: Element;
@@ -69,15 +64,15 @@ export abstract class Character {
     this.artifacts = artifacts;
   }
 
-  abstract normalAttack(statusBuffs: StatusBuff[]): Damage[];
+  abstract normalAttack(statusBuffs: StatusBuff[]): Attack[];
 
-  abstract chargeAttack(statusBuffs: StatusBuff[]): Damage[];
+  abstract chargeAttack(statusBuffs: StatusBuff[]): Attack[];
 
-  //abstract plungingAttack(statusBuffs: StatusBuff[]): Damage[];
+  //abstract plungingAttack(statusBuffs: StatusBuff[]): Attack[];
 
-  abstract skill(statusBuffs: StatusBuff[]): Damage[];
+  abstract skill(statusBuffs: StatusBuff[]): Attack[];
 
-  abstract burst(statusBuffs: StatusBuff[]): Damage[];
+  abstract burst(statusBuffs: StatusBuff[]): Attack[];
 
   calculateAttack(statusBuffs: StatusBuff[]) {
     const artifactStatusBuffs: StatusBuff[] = sumArtifactStatusBuff(this.artifacts);

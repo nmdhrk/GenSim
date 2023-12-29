@@ -15,15 +15,16 @@ const artifacts = Artifact.createArtifactsFromJson([
 const weapon = Weapon.createFromJson('../dataJson/weapon1.json');
 
 const shimeken: StatusBuff = { type: 'percent', name: 'attack', value: 0.36 };
+const faruzan: StatusBuff = { type: 'percent', name: 'anemo', value: 0.324 };
 
 const wanderer = new Wanderer(artifacts, weapon);
 wanderer.attachedElement = 'cyro';
 const enemy = new Enemy();
 enemy.element = 'pyro';
 
-const skill = wanderer.skill([shimeken]);
+const skill = wanderer.skill([shimeken, faruzan]);
 console.log(`スキル:${enemy.calculateDamage(skill[0])}`);
-console.log(wanderer.calculateStatus([shimeken]));
+console.log(wanderer.calculateStatus([shimeken, faruzan]));
 const normalAttacks = wanderer.normalAttack([shimeken]);
 console.log(`通常攻撃1:${enemy.calculateDamage(normalAttacks[0])}`);
 console.log(`通常攻撃2:${enemy.calculateDamage(normalAttacks[1])}`);
@@ -31,13 +32,13 @@ console.log(
   `通常攻撃3:${enemy.calculateDamage(normalAttacks[2])}+${enemy.calculateDamage(normalAttacks[3])}`
 );
 
-const chargeAttack = wanderer.chargeAttack([shimeken]);
+const chargeAttack = wanderer.chargeAttack([shimeken, faruzan]);
 console.log(`重撃:${enemy.calculateDamage(chargeAttack[0])}`);
 
 const burst = wanderer.burst([shimeken]);
 console.log(`元素爆発:${enemy.calculateDamage(burst[0])}`);
 
-const normalAttacks2 = wanderer.normalAttack([shimeken]);
+const normalAttacks2 = wanderer.normalAttack([shimeken, faruzan]);
 console.log(`通常攻撃1:${enemy.calculateDamage(normalAttacks2[0])}`);
 console.log(`通常攻撃2:${enemy.calculateDamage(normalAttacks2[1])}`);
 console.log(
@@ -46,4 +47,5 @@ console.log(
   )}`
 );
 
-console.log(wanderer.calculateStatus([shimeken]));
+console.log(wanderer.calculateStatus([shimeken, faruzan]));
+console.log(`敵の受けたダメージは${enemy.hitDamage}`);
