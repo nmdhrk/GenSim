@@ -26,12 +26,11 @@ export function printArtifact(artifact: Artifact) {
 }
 
 export function sumArtifactStatusBuff(artifacts: Artifact[]) {
-  //副作用があるため要修正
   let result: StatusBuff[] = [];
   for (const artifact of artifacts) {
-    result = addStatusBuff(result, artifact.mainStatus).concat();
+    result = addStatusBuff(result, artifact.mainStatus);
     for (const subStatus of artifact.subStatuses) {
-      result = addStatusBuff(result, subStatus).concat();
+      result = addStatusBuff(result, subStatus);
     }
   }
   return result;

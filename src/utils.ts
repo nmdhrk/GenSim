@@ -66,7 +66,11 @@ export function sumStatusBuff(
   statusBuffs1: StatusBuff[],
   statusBuffs2: StatusBuff[]
 ): StatusBuff[] {
-  let result: StatusBuff[] = statusBuffs1.concat();
+  let result: StatusBuff[] = statusBuffs1.map((list) => ({
+    type: list.type,
+    name: list.name,
+    value: list.value,
+  })) as StatusBuff[];
 
   for (const statusBuff of statusBuffs2) {
     result = addStatusBuff(result, statusBuff);
